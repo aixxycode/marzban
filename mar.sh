@@ -192,7 +192,7 @@ apt-get install libio-socket-inet6-perl libsocket6-perl libcrypt-ssleay-perl lib
 timedatectl set-timezone Asia/Jakarta;
 
 #Install Marzban
-sudo bash -c "$(curl -sL https://github.com/aixxycode/Marzban-scripts/raw/master/marzban.sh)" @ install
+sudo bash -c "$(curl -sL https://raw.githubusercontent.com/gawrame/Marzban-scripts/master/marzban.sh)" @ install
 
 #Install Subs
 wget -N -P /var/lib/marzban/templates/subscription/  https://raw.githubusercontent.com/aixxycode/marzban/main/index.html
