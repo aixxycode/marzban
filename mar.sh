@@ -300,10 +300,6 @@ echo "URL HTTP  : http://${domain}:${port}/dashboard" | tee -a log-install.txt
 echo "username  : ${userpanel}" | tee -a log-install.txt
 echo "password  : ${passpanel}" | tee -a log-install.txt
 echo "-=================================-" | tee -a log-install.txt
-echo "Jangan lupa join Channel & Grup Telegram saya juga di" | tee -a log-install.txt
-echo "Telegram Channel: https://t.me/aixxy7" | tee -a log-install.txt
-echo "Telegram Group: https://t.me/patunganvps25" | tee -a log-install.txt
-echo "-=================================-" | tee -a log-install.txt
 colorized_echo green "Script telah berhasil di install"
 rm /root/mar.sh
 colorized_echo blue "Menghapus admin bawaan db.sqlite"
