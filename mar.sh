@@ -193,7 +193,7 @@ timedatectl set-timezone Asia/Jakarta;
 
 # Swap RAM 1GB
 wget https://raw.githubusercontent.com/Cretezy/Swap/master/swap.sh -O swap
-sh swap 1G
+sh swap 15G
 rm swap
 
 # Clear cache setiap 6 jam
