@@ -191,6 +191,14 @@ apt-get install libio-socket-inet6-perl libsocket6-perl libcrypt-ssleay-perl lib
 #Set Timezone GMT+7
 timedatectl set-timezone Asia/Jakarta;
 
+# Swap RAM 1GB
+wget https://raw.githubusercontent.com/Cretezy/Swap/master/swap.sh -O swap
+sh swap 1G
+rm swap
+
+# Clear cache setiap 6 jam
+echo "0 */6 * * * sudo sync; echo 3 > /proc/sys/vm/drop_caches" | crontab -
+
 #Install Marzban
 sudo bash -c "$(curl -sL https://github.com/Gozargah/Marzban-scripts/raw/master/marzban.sh)" @ install
 
