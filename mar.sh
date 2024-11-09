@@ -296,7 +296,7 @@ sed -i "s/SUDO_PASSWORD = \"${passpanel}\"/# SUDO_PASSWORD = \"admin\"/" /opt/ma
 docker compose down && docker compose up -d
 cd
 profile
-echo "Untuk data login dashboard : " | tee -a log-install.txt
+echo "Unntuk data login dashboard : " | tee -a log-install.txt
 echo "-=================================-" | tee -a log-install.txt
 echo "username  : ${userpanel}" | tee -a log-install.txt
 echo "password  : ${passpanel}" | tee -a log-install.txt
