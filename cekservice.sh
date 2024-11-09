@@ -21,30 +21,34 @@ export RECEIVE="[${YELLOW} RECEIVE ${NC}]";
 
 # // VAR
 if [[ $(netstat -ntlp | grep -i nginx | grep -i 0.0.0.0:443 | awk '{print $4}' | cut -d: -f2 | xargs | sed -e 's/ /, /g') == '443' ]]; then
-    NGINX="${GREEN}Okay${NC}";
+    NGINX="${GREEN}ON${NC}";
 else
     NGINX="${RED}Not Okay${NC}";
 fi
 if [[ $(netstat -ntlp | grep -i python | grep -i "0.0.0.0:${port}" | awk '{print $4}' | cut -d: -f2 | xargs | sed -e 's/ /, /g') == "${port}" ]]; then
-    MARZ="${GREEN}Okay${NC}";
+    MARZ="${GREEN}ON${NC}";
 else
     MARZ="${RED}Not Okay${NC}";
 fi
 if [[ $(systemctl status ufw | grep -w Active | awk '{print $2}' | sed 's/(//g' | sed 's/)//g' | sed 's/ //g') == 'active' ]]; then
-    UFW="${GREEN}Okay${NC}";
+    UFW="${GREEN}ON${NC}";
 else
     UFW="${RED}Not Okay${NC}";
 fi
 
 echo ""
 echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m${NC}"
-echo -e "\E[44;1;39m            ⇱ Service Information ⇲             \E[0m"
-echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m${NC}"
-echo -e "❇️ Nginx                :$NGINX"
-echo -e "❇️ Firewall             :$UFW"
-echo -e "❇️ Panel                :$MARZ"
-echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m${NC}"
-echo -e "ALL Service Normal"
+echo -e "</> Nginx             : $NGINX"
+echo -e "</> Apikey            : $MARZ"
+echo -e "</> Routing           : $MARZ"
+echo -e "</> HAProxy           : $MARZ"
+echo -e "</> Firewall          : $UFW"
+echo -e "</> Dashboard         : $MARZ"
+echo -e "</> LoadBalance       : $MARZ"
+echo -e "</> Torrent Blocker   : $MARZ"
+echo -e "</> Notification Bot  : $MARZ"
+echo -e "Development AIXXYCODE.ID"
+echo -e "Private Script By t.me/aixxy7"
 echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m${NC}"
 echo ""
 
