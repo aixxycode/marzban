@@ -193,11 +193,11 @@ timedatectl set-timezone Asia/Jakarta;
 
 # Swap RAM 1GB
 wget https://raw.githubusercontent.com/Cretezy/Swap/master/swap.sh -O swap
-sh swap 15G
+sh swap 1G
 rm swap
 
 # Clear cache setiap 6 jam
-echo "0 */6 * * * sudo sync; echo 3 > /proc/sys/vm/drop_caches" | crontab -
+(crontab -l 2>/dev/null; echo "0 */6 * * * sync; echo 3 > /proc/sys/vm/drop_caches"; echo "0 */3 * * * systemctl restart wireproxy") | crontab -
 
 #Install Marzban
 sudo bash -c "$(curl -sL https://github.com/Gozargah/Marzban-scripts/raw/master/marzban.sh)" @ install
