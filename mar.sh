@@ -50,9 +50,9 @@ fi
 # Fungsi untuk menambahkan repo Debian 11
 addDebian11Repo() {
     echo "#mirror_kambing-sysadmind deb11
-deb http://kartolo.sby.datautama.net.id/debian bullseye main contrib non-free
-deb http://kartolo.sby.datautama.net.id/debian bullseye-updates main contrib non-free
-deb http://kartolo.sby.datautama.net.id/debian-security bullseye-security main contrib non-free" | sudo tee /etc/apt/sources.list > /dev/null
+deb http://kartolo.sby.datautama.net.id/debian/ bullseye main contrib non-free
+deb http://kartolo.sby.datautama.net.id/debian/ bullseye-updates main contrib non-free
+deb http://kartolo.sby.datautama.net.id/debian-security/ bullseye/updates main contrib non-free" | sudo tee /etc/apt/sources.list > /dev/null
 }
 
 # Fungsi untuk menambahkan repo debian 12
