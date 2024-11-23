@@ -211,7 +211,7 @@ wget -O /opt/marzban/.env "https://raw.githubusercontent.com/aixxycode/marzban/m
 #install core Xray & Assets folder
 mkdir -p /var/lib/marzban/assets
 mkdir -p /var/lib/marzban/core
-wget -O /var/lib/marzban/core/xray.zip "https://github.com/XTLS/Xray-core/releases/download/v24.11.5/Xray-linux-64.zip"  
+wget -O /var/lib/marzban/core/xray.zip "wget https://github.com/XTLS/xray-core/releases/latest/download/Xray-linux-64.zip"  
 cd /var/lib/marzban/core && unzip xray.zip && chmod +x xray
 cd
 
@@ -267,6 +267,17 @@ curl https://get.acme.sh | sh -s email=$email
 wget -O /var/lib/marzban/xray_config.json "https://raw.githubusercontent.com/aixxycode/marzban/main/xray_config.json"
 
 #install firewall
+apt install ufw -y
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw allow ssh
+sudo ufw allow http
+sudo ufw allow https
+sudo ufw allow 8081/tcp
+sudo ufw allow 1080/tcp
+sudo ufw allow 1080/udp
+sudo ufw allow $port/tcp
+yes | sudo ufw enable
 
 #install database
 wget -O /var/lib/marzban/db.sqlite3 "https://github.com/aixxycode/marzban/raw/main/db.sqlite3"
