@@ -192,9 +192,9 @@ apt-get install libio-socket-inet6-perl libsocket6-perl libcrypt-ssleay-perl lib
 timedatectl set-timezone Asia/Jakarta;
 
 # Swap RAM 1GB
-wget https://raw.githubusercontent.com/Cretezy/Swap/master/swap.sh -O swap
-sh swap 1G
-rm swap
+#wget https://raw.githubusercontent.com/Cretezy/Swap/master/swap.sh -O swap
+#sh swap 1G
+#rm swap
 
 # Clear cache setiap 6 jam
 (crontab -l 2>/dev/null; echo "0 */6 * * * sync; echo 3 > /proc/sys/vm/drop_caches"; echo "0 */3 * * * systemctl restart wireproxy") | crontab -
