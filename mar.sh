@@ -263,18 +263,18 @@ curl https://get.acme.sh | sh -s email=$email
 ~/.acme.sh/acme.sh --installcert -d $domain --fullchainpath /var/lib/marzban/xray.crt --keypath /var/lib/marzban/xray.key --ecc
 wget -O /var/lib/marzban/xray_config.json "https://raw.githubusercontent.com/aixxycode/marzban/main/xray_config.json"
 
-#install firewall
-#apt install ufw -y
-#sudo ufw default deny incoming
-#sudo ufw default allow outgoing
-#sudo ufw allow ssh
-##sudo ufw allow http
-#sudo ufw allow https
-#sudo ufw allow 8081/tcp
-#sudo ufw allow 1080/tcp
-#sudo ufw allow 1080/udp
-#sudo ufw allow $port/tcp
-#yes | sudo ufw enable
+install firewall
+apt install ufw -y
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw allow ssh
+sudo ufw allow http
+sudo ufw allow https
+sudo ufw allow 8081/tcp
+sudo ufw allow 1080/tcp
+sudo ufw allow 1080/udp
+sudo ufw allow $port/tcp
+yes | sudo ufw enable
 
 #install database
 wget -O /var/lib/marzban/db.sqlite3 "https://github.com/aixxycode/marzban/raw/main/db.sqlite3"
