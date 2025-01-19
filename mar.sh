@@ -252,8 +252,10 @@ touch /var/log/nginx/error.log
 wget -O /opt/marzban/nginx.conf "https://raw.githubusercontent.com/aixxycode/marzban/main/nginx.conf"
 wget -O /opt/marzban/default.conf "https://raw.githubusercontent.com/aixxycode/marzban/main/vps.conf"
 wget -O /opt/marzban/xray.conf "https://raw.githubusercontent.com/aixxycode/marzban/main/xray.conf"
+systemctl enable nginx
 mkdir -p /var/www/html
-echo "<pre>Setup by AutoScript AixxyCode</pre>" > /var/www/html/index.html
+wget -O /var/www/html/index.html "https://raw.githubusercontent.com/aixxycode/marzban/main/ip.html"
+systemctl start nginx
 
 #install socat
 apt install iptables -y
