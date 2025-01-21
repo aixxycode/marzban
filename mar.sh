@@ -132,6 +132,9 @@ while true; do
     fi
 done
 
+read -rp "Masukkan Password Panel: " passpanel
+echo "$passpanel" > /etc/data/passpanel
+
 #Preparation
 clear
 cd;
