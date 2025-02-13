@@ -4,7 +4,6 @@ vnstat -l > /tmp/vnstat.log &
 # Mendapatkan PID dari proses vnstat
 vnstat_pid=$!
 # Memeriksa lalu lintas setiap 1 detik
-while true; do
     clear  # Membersihkan layar terminal
     echo "Live Traffic Monitoring:"
     echo "========================"
