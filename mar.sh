@@ -215,19 +215,6 @@ chmod +x /usr/bin/cekservice
 wget -O /opt/marzban/docker-compose.yml "https://raw.githubusercontent.com/aixxycode/marzban/main/docker-compose.yml"
 
 #Install VNSTAT
-apt -y install vnstat
-/etc/init.d/vnstat restart
-apt -y install libsqlite3-dev
-wget https://github.com/aixxycode/marzban/raw/main/vnstat-2.6.tar.gz
-tar zxvf vnstat-2.6.tar.gz
-cd vnstat-2.6
-./configure --prefix=/usr --sysconfdir=/etc && make && make install 
-cd
-chown vnstat:vnstat /var/lib/vnstat -R
-systemctl enable vnstat
-/etc/init.d/vnstat restart
-rm -f /root/vnstat-2.6.tar.gz 
-rm -rf /root/vnstat-2.6
 
 #Install Speedtest
 curl -s https://packagecloud.io/install/repositories/ookla/speedtest-cli/script.deb.sh | sudo bash
