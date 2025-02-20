@@ -214,8 +214,6 @@ chmod +x /usr/bin/cekservice
 #install compose
 wget -O /opt/marzban/docker-compose.yml "https://raw.githubusercontent.com/aixxycode/marzban/main/docker-compose.yml"
 
-#Install VNSTAT
-
 #Install Speedtest
 
 #install nginx
