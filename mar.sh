@@ -217,8 +217,6 @@ wget -O /opt/marzban/docker-compose.yml "https://raw.githubusercontent.com/aixxy
 #Install VNSTAT
 
 #Install Speedtest
-curl -s https://packagecloud.io/install/repositories/ookla/speedtest-cli/script.deb.sh | sudo bash
-sudo apt-get install speedtest -y
 
 #install nginx
 mkdir -p /var/log/nginx
