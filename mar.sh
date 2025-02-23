@@ -214,7 +214,25 @@ chmod +x /usr/bin/cekservice
 #install compose
 wget -O /opt/marzban/docker-compose.yml "https://raw.githubusercontent.com/aixxycode/marzban/main/docker-compose.yml"
 
+
+#Install VNSTAT
+apt -y install vnstat
+/etc/init.d/vnstat restart
+apt -y install libsqlite3-dev
+wget https://github.com/GawrAme/MarLing/raw/main/vnstat-2.6.tar.gz
+tar zxvf vnstat-2.6.tar.gz
+cd vnstat-2.6
+./configure --prefix=/usr --sysconfdir=/etc && make && make install 
+cd
+chown vnstat:vnstat /var/lib/vnstat -R
+systemctl enable vnstat
+/etc/init.d/vnstat restart
+rm -f /root/vnstat-2.6.tar.gz 
+rm -rf /root/vnstat-2.6
+
 #Install Speedtest
+curl -s https://packagecloud.io/install/repositories/ookla/speedtest-cli/script.deb.sh | sudo bash
+sudo apt-get install speedtest -y
 
 #install nginx
 mkdir -p /var/log/nginx
@@ -263,28 +281,25 @@ sed -i "s/SUDO_USERNAME = \"${userpanel}\"/# SUDO_USERNAME = \"admin\"/" /opt/ma
 sed -i "s/SUDO_PASSWORD = \"${passpanel}\"/# SUDO_PASSWORD = \"admin\"/" /opt/marzban/.env
 docker compose down && docker compose up -d
 cd
-echo "Tunggu 15 detik untuk generate token API"
-sleep 15s
+echo "Tunggu 30 detik untuk generate token API"
+sleep 30s
 
 #instal token
 curl -X 'POST' \
   "https://${domain}/api/admin/token" \
   -H 'accept: application/json' \
   -H 'Content-Type: application/x-www-form-urlencoded' \
-  -d "grant_type=password&username=${userpanel}&password=${passpanel}&scope=&client_id=&client_secret=" > /etc/data/token.json
+  -d "grant_type=password&username=${userpanel}&password=${passpanel}&scope=&client_id=string&client_secret=string" > /etc/data/token.json
 cd
-profile
 touch /root/log-install.txt
-echo "Untuk data login dashboard Marzban: " | tee -a /root/log-install.txt
-echo "-=================================-" | tee -a /root/log-install.txt
-echo "URL HTTPS : https://${domain}/dashboard" | tee -a /root/log-install.txt
-echo "username  : ${userpanel}" | tee -a /root/log-install.txt
-echo "password  : ${passpanel}" | tee -a /root/log-install.txt
-echo "-=================================-" | tee -a /root/log-install.txt
-echo "Jangan lupa join Channel & Grup Telegram saya juga di" | tee -a /root/log-install.txt
-echo "Telegram Channel: https://t.me/LingVPN" | tee -a /root/log-install.txt
-echo "Telegram Group: https://t.me/LingVPN_Group" | tee -a /root/log-install.txt
-echo "-=================================-" | tee -a /root/log-install.txt
+echo -e "Untuk data login dashboard Marzban: 
+-=================================-
+URL HTTPS : https://${domain}/dashboard 
+username  : ${userpanel}
+password  : ${passpanel}
+-=================================-
+-=================================-" > /root/log-install.txt
+profile
 colorized_echo green "Script telah berhasil di install"
 rm /root/mar.sh
 colorized_echo blue "Menghapus admin bawaan db.sqlite"
@@ -295,4 +310,3 @@ if [ "$answer" == "${answer#[Yy]}" ] ;then
 exit 0
 else
 cat /dev/null > ~/.bash_history && history -c && reboot
-fi
