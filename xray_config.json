@@ -1,5 +1,7 @@
 {
   "log": {
+    "access": "/var/lib/marzban/access.log",
+    "error": "/var/lib/marzban/error.log",
     "loglevel": "warning"
   },
   "dns": {
@@ -7,9 +9,10 @@
       "1.1.1.1",
       "1.0.0.1",
       "8.8.8.8",
-      "8.8.4.4"
+      "8.8.4.4",
+      "127.0.0.1"
     ],
-    "tag": "DNS-Internal"
+    "tag": "dns-in"
   },
   "routing": {
     "domainStrategy": "IPIfNonMatch",
@@ -209,28 +212,26 @@
   ],
   "outbounds": [
     {
+      "tag": "direct",
       "protocol": "freedom",
-      "tag": "DIRECT"
-    },
-    {
-      "protocol": "blackhole",
-      "tag": "BLOCK"
-    },
-    {
-      "tag": "DNS-Internal",
-      "protocol": "dns",
-      "settings": {}
-    },
-    {
-      "tag": "WARP",
-      "protocol": "socks",
       "settings": {
-        "servers": [
-          {
-            "address": "127.0.0.1",
-            "port": 40000
-          }
-        ]
+        "domainStrategy": "UseIPv4"
+      }
+    },
+    {
+      "tag": "block",
+      "protocol": "blackhole",
+      "settings": {
+        "response": {
+          "type": "http"
+        }
+      }
+    },
+    {
+      "tag": "dns-out",
+      "protocol": "dns",
+      "settings": {
+        "nonIPQuery": "skip"
       }
     }
   ]
