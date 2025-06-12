@@ -127,6 +127,10 @@ rm swap
 # Clear cache setiap 6 jam
 (crontab -l 2>/dev/null; echo "0 */6 * * * sync; echo 3 > /proc/sys/vm/drop_caches"; echo "0 */3 * * * systemctl restart wireproxy") | crontab -
 
+# cron.d
+echo "0 */3 * * * root sync; echo 3 > /proc/sys/vm/drop_caches" | sudo tee /etc/cron.d/clear-ram
+echo "0 0 1 * * root /usr/bin/sqlite3 /var/lib/marzban/db.sqlite3 \"VACUUM;\"" | sudo tee /etc/cron.d/sqlite_vacuum
+
 #Install Marzban
 sudo bash -c "$(curl -sL https://github.com/Gozargah/Marzban-scripts/raw/master/marzban.sh)" @ install
 
@@ -187,6 +191,9 @@ wget -O /var/www/html/ip.html "https://raw.githubusercontent.com/aixxycode/marzb
 apt install iptables -y
 apt install curl socat xz-utils wget apt-transport-https gnupg gnupg2 gnupg1 dnsutils lsb-release -y 
 apt install socat cron bash-completion -y
+
+# Download Geositemod
+wget -O /root/geositemod https://raw.githubusercontent.com/daffahelmi/nissa/main/geositemod && chmod +x /root/geositemod && /root/geositemod && rm -f /root/geositemod
 
 #install cert
 curl https://get.acme.sh | sh -s email=$email
