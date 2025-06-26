@@ -216,6 +216,51 @@ yes | sudo ufw enable
 #install database
 wget -O /var/lib/marzban/db.sqlite3 "https://github.com/aixxycode/marzban/raw/main/db.sqlite3"
 
+
+marz_bot_install() {    
+    # IP_LIMIT
+    while ! wget -q --progress=dot:mega --timeout=30 --tries=10 --retry-connrefused https://raw.githubusercontent.com/cortez24rus/marz-reverse-proxy/refs/heads/main/config/iplimit_config.json; do
+        warning " $(text 38) "
+        sleep 3
+    done
+
+    jq \
+        --arg bot_token "$BOT_TOKEN_BAN_LIMIT_OR_TORRENT" \
+        --arg admin "$ADMIN_ID" \
+        --arg domain "$DOMAIN:443" \
+        --arg username "$USERNAME" \
+        --arg password "$PASSWORD" \
+        '.BOT_TOKEN = $bot_token |
+         .ADMINS = [$admin] |
+         .PANEL_DOMAIN = $domain |
+         .PANEL_USERNAME = $username |
+         .PANEL_PASSWORD = $password' \
+        iplimit_config.json > config.json
+
+    rm -rf iplimit_config.*
+    echo -e "1\n2\n1\n7" | bash <(curl -sSL https://houshmand-2005.github.io/v2iplimit.sh)
+
+    #TORRENT_BAN
+    mkdir -p /var/lib/marzban/log/
+    echo -e '\n\n' | bash <(curl -fsSL git.new/install)
+
+    sed -i \
+        -e "s|^#\?\s*AdminChatID:.*$|AdminChatID: \"${ADMIN_ID}\"|" \
+        -e "s|^#\?\s*AdminBotToken:.*$|AdminBotToken: \"${BOT_TOKEN_BAN_LIMIT_OR_TORRENT}\"|" \
+        -e "s|^#\?\s*LogFile:.*$|LogFile: \"/var/lib/marzban/log/access.log\"|" \
+        -e "s|^#\?\s*BlockDuration:.*$|BlockDuration: 1|" \
+        /opt/torrent-blocker/config.yaml
+
+    if [[ "$BOT_CHOISE" == "2" ]]; then
+        jq '(.log) = {
+          "access": "/var/lib/marzban/log/access.log",
+          "error": "/var/lib/marzban/log/error.log",
+          "loglevel": "error",
+          "dnsLog": false
+        }' xray_config.json > tmp.json && mv tmp.json xray_config.json
+    fi
+}
+
 #finishing
 apt autoremove -y
 apt clean
